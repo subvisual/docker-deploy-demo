@@ -1,0 +1,4 @@
+#!/bin/bash
+
+fig build
+fig run web rake db:migrate

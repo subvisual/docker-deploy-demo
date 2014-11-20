@@ -1,0 +1,13 @@
+web:
+  build: .
+  volumes:
+    - .:/usr/src/app
+    - "~/.docker-volumes/test/bundle/:/usr/local/bundle/"
+  ports:
+    - 3000:3000
+  links:
+    - db
+db:
+  image: groupbuddies/dev-postgres:9.3
+  volumes:
+    - "~/.docker-volumes/test/db/:/var/lib/postgresql/data/"

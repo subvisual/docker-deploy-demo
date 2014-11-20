@@ -1,0 +1,19 @@
+default: &default
+  adapter: postgresql
+  pool: 5
+  timeout: 5000
+  encoding: unicode
+
+local: &local
+  host: db
+  username: postgres
+
+development:
+  <<: *default
+  <<: *local
+  database: rails_test_development
+
+test:
+  <<: *default
+  <<: *local
+  database: rails_test_test
