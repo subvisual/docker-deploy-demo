@@ -1,39 +1,25 @@
-require 'mina/bundler'
-require 'mina/rails'
 require 'mina/git'
-# require 'mina/rbenv'  # for rbenv support. (http://rbenv.org)
-# require 'mina/rvm'    # for rvm support. (http://rvm.io)
 
-# Basic settings:
-#   domain       - The hostname to SSH to.
-#   deploy_to    - Path to deploy into.
-#   repository   - Git repo to clone from. (needed by mina/git)
-#   branch       - Branch name to deploy. (needed by mina/git)
-
-set :domain, 'foobar.com'
-set :deploy_to, '/var/www/foobar.com'
-set :repository, 'git://...'
+set :domain, 'localhost'
+set :user, 'vagrant'
+set :port, 2222
+set :forward_agent, true
+set :identity_file, 'config/insecure_private_key'
+set :deploy_to, '/home/vagrant/docker-deploy-demo'
+set :repository, 'git://github.com/groupbuddies/docker-deploy-demo.git'
 set :branch, 'master'
 
 # For system-wide RVM install.
-#   set :rvm_path, '/usr/local/rvm/bin/rvm'
+set :rvm_path, '/usr/local/rvm/bin/rvm'
 
 # Manually create these paths in shared/ (eg: shared/config/database.yml) in your server.
 # They will be linked in the 'deploy:link_shared_paths' step.
 set :shared_paths, ['config/database.yml', 'log']
 
-# Optional settings:
-#   set :user, 'foobar'    # Username in the server to SSH to.
-#   set :port, '30000'     # SSH port number.
-#   set :forward_agent, true     # SSH forward_agent.
 
 # This task is the environment that is loaded for most commands, such as
 # `mina deploy` or `mina rake`.
 task :environment do
-  # If you're using rbenv, use this to load the rbenv environment.
-  # Be sure to commit your .rbenv-version to your repository.
-  # invoke :'rbenv:load'
-
   # For those using RVM, use this to load an RVM version@gemset.
   # invoke :'rvm:use[ruby-1.9.3-p125@default]'
 end
@@ -59,14 +45,21 @@ task :deploy => :environment do
     # instance of your project.
     invoke :'git:clone'
     invoke :'deploy:link_shared_paths'
-    invoke :'bundle:install'
-    invoke :'rails:db_migrate'
-    invoke :'rails:assets_precompile'
+    # invoke :'bundle:install'
+    # invoke :'rails:db_migrate'
+    # invoke :'rails:assets_precompile'
     invoke :'deploy:cleanup'
 
     to :launch do
       queue "mkdir -p #{deploy_to}/#{current_path}/tmp/"
-      queue "touch #{deploy_to}/#{current_path}/tmp/restart.txt"
+      # queue "touch #{deploy_to}/#{current_path}/tmp/restart.txt"
+      #
+      fig = "fig -f fig.production.yml"
+      queue "#{fig} stop"
+      queue "#{fig} build"
+      queue "#{fig} run web rake db:migrate"
+      queue "#{fig} run web rake assets:precompile"
+      queue "#{fig} start"
     end
   end
 end

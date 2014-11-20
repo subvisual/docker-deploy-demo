@@ -17,6 +17,11 @@ docker start postgres
 docker start rails
 START
 
+$fig = <<START
+curl -L https://github.com/docker/fig/releases/download/1.0.1/fig-`uname -s`-`uname -m` > /usr/local/bin/fig; chmod +x /usr/local/bin/fig
+START
+
+
 
 Vagrant.configure("2") do |config|
   config.vm.box = "hashicorp/precise64"
@@ -32,6 +37,7 @@ Vagrant.configure("2") do |config|
 
   # install latest docker
   config.vm.provision "docker"
+  config.vm.provision "shell", inline: $fig
 
   # # setup the containers when the VM is first created
   # config.vm.provision "shell", inline: $setup

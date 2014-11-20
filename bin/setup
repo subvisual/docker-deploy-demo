@@ -1,4 +1,7 @@
 #!/bin/bash
 
-fig build
-fig run web rake db:create db:setup
+figfile=${1:-fig.yml}
+cmd="fig -f $figfile"
+
+$cmd build
+$cmd run web rake db:create db:setup
