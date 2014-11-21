@@ -56,6 +56,7 @@ task :deploy => :environment do
       fig = "fig -f fig.production.yml"
       queue "#{fig} stop"
       queue "#{fig} build"
+      queue "#{fig} run web which bundle || #{fig} run web gem install bundler"
       queue "#{fig} run web bundle install"
       queue "#{fig} run web rake db:migrate"
       queue "#{fig} run web rake assets:precompile"
