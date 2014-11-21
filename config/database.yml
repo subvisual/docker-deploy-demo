@@ -17,3 +17,8 @@ test:
   <<: *default
   <<: *local
   database: rails_test_test
+
+production:
+  <<: *default
+  <<: *local
+  database: rails_test_production
