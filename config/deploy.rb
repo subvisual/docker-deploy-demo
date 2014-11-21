@@ -1,18 +1,19 @@
 require 'mina/git'
 
-set :domain, 'localhost'
+set :domain, '128.199.51.99'
+set :user, 'root'
 set :port, 22
 set :forward_agent, true
-set :deploy_to, '/home/naps62/docker-deploy-demo'
+set :deploy_to, '/root/docker-deploy-demo'
 set :repository, 'git://github.com/groupbuddies/docker-deploy-demo.git'
 set :branch, 'master'
 
 # For system-wide RVM install.
-set :rvm_path, '/usr/local/rvm/bin/rvm'
+# set :rvm_path, '/usr/local/rvm/bin/rvm'
 
 # Manually create these paths in shared/ (eg: shared/config/database.yml) in your server.
 # They will be linked in the 'deploy:link_shared_paths' step.
-set :shared_paths, []
+set :shared_paths, ['Dockerfile']
 
 
 # This task is the environment that is loaded for most commands, such as
@@ -51,12 +52,12 @@ task :deploy => :environment do
     to :launch do
       queue "mkdir -p #{deploy_to}/#{current_path}/tmp/"
 
-      fig = "fig -f fig.production.yml"
-      queue "#{fig} stop"
-      queue "#{fig} build"
-      queue "#{fig} run web which bundle || #{fig} run web gem install bundler"
-      queue "#{fig} run web bundle install"
-      queue "#{fig} run web rake db:migrate"
+      # fig = "fig -f fig.production.yml"
+      # queue "#{fig} stop"
+      # queue "#{fig} build"
+      # queue "#{fig} run web which bundle || #{fig} run web gem install bundler"
+      # queue "#{fig} run web bundle install"
+      # queue "#{fig} run web rake db:migrate"
       # queue "#{fig} run web rake assets:precompile"
       # queue "#{fig} start"
     end
