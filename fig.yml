@@ -1,7 +1,7 @@
 web:
   build: .
   volumes:
-    - .:/usr/src/app
+    - ".:/usr/src/app"
     - "~/.docker-volumes/test/bundle/:/usr/local/bundle/"
   ports:
     - 3000:3000

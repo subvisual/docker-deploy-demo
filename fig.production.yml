@@ -1,5 +1,6 @@
 web:
   build: .
+  command: bin/start-server.sh
   volumes:
     - .:/usr/src/app
     - "~/.docker-volumes/test/bundle/:/usr/local/bundle/"
