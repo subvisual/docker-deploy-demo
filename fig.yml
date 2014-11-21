@@ -1,8 +1,9 @@
 web:
   build: .
+  command: bin/start-server.sh
   volumes:
     - ".:/usr/src/app"
-    - "~/.docker-volumes/test/bundle/:/usr/local/bundle/"
+    - "~/.docker-volumes/local-test/bundle/:/usr/local/bundle/"
   ports:
     - 3000:3000
   links:
@@ -10,4 +11,4 @@ web:
 db:
   image: groupbuddies/dev-postgres:9.3
   volumes:
-    - "~/.docker-volumes/test/db/:/var/lib/postgresql/data/"
+    - "~/.docker-volumes/local-test/db/:/var/lib/postgresql/data/"

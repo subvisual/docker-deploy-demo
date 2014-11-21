@@ -1,11 +1,9 @@
 require 'mina/git'
 
 set :domain, 'localhost'
-set :user, 'vagrant'
-set :port, 2222
+set :port, 22
 set :forward_agent, true
-set :identity_file, 'config/insecure_private_key'
-set :deploy_to, '/home/vagrant/docker-deploy-demo'
+set :deploy_to, '/home/naps62/docker-deploy-demo'
 set :repository, 'git://github.com/groupbuddies/docker-deploy-demo.git'
 set :branch, 'master'
 
@@ -14,7 +12,7 @@ set :rvm_path, '/usr/local/rvm/bin/rvm'
 
 # Manually create these paths in shared/ (eg: shared/config/database.yml) in your server.
 # They will be linked in the 'deploy:link_shared_paths' step.
-set :shared_paths, ['config/database.yml', 'log']
+set :shared_paths, []
 
 
 # This task is the environment that is loaded for most commands, such as
@@ -59,8 +57,8 @@ task :deploy => :environment do
       queue "#{fig} run web which bundle || #{fig} run web gem install bundler"
       queue "#{fig} run web bundle install"
       queue "#{fig} run web rake db:migrate"
-      queue "#{fig} run web rake assets:precompile"
-      queue "#{fig} start"
+      # queue "#{fig} run web rake assets:precompile"
+      # queue "#{fig} start"
     end
   end
 end

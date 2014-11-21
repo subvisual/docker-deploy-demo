@@ -4,4 +4,6 @@ figfile=${1:-fig.yml}
 cmd="fig -f $figfile"
 
 $cmd build
+$cmd run web which bundle || $cmd run web gem install bundler
+$cmd run web bundle install
 $cmd run web rake db:migrate

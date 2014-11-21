@@ -3,6 +3,7 @@ web:
   command: bundle exec puma -C config/puma.rb
   volumes:
     - .:/usr/src/app
+    - "../shared/config/database.yml:/usr/src/app/config/database.yml"
     - "~/.docker-volumes/test/bundle/:/usr/local/bundle/"
   ports:
     - 3000:3000
