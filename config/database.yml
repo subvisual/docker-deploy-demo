@@ -20,5 +20,7 @@ test:
 
 production:
   <<: *default
-  <<: *local
   database: rails_test_production
+  host: <%= ENV.fetch('DB_1_PORT_5432_TCP_ADDR', 'localhost') %>
+  port: <%= ENV.fetch('DB_1_PORT_5432_TCP_PORT', '5432') %>
+  username: postgres
