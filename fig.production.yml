@@ -1,6 +1,6 @@
 web:
   build: .
-  command: bin/start-server.sh
+  command: bundle exec puma -C config/puma.rb
   volumes:
     - .:/usr/src/app
     - "~/.docker-volumes/test/bundle/:/usr/local/bundle/"
