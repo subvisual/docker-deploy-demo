@@ -4,7 +4,7 @@ set :domain, '128.199.51.99'
 set :user, 'root'
 set :port, 22
 set :forward_agent, true
-set :deploy_to, '/root/docker-deploy-demo'
+set :deploy_to, '/root/ddd'
 set :repository, 'git://github.com/groupbuddies/docker-deploy-demo.git'
 set :branch, 'master'
 
