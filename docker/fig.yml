@@ -1,6 +1,5 @@
 web:
   build: docker/web
-  command: bundle exec puma -C config/puma.rb
   volumes:
     - .:/usr/src/app
     - "~/ddd/shared/bundle/:/usr/src/app/vendor/bundle/"
