@@ -3,9 +3,9 @@ web:
   command: bundle exec puma -C config/puma.rb
   volumes:
     - .:/usr/src/app
-    - "~/docker-deploy-demo/shared/bundle/:/usr/src/app/vendor/bundle/"
-    - "~/docker-deploy-demo/shared/log/:/usr/src/app/log/"
-    - "~/docker-deploy-demo/shared/sockets/:/usr/src/app/sockets/"
+    - "~/ddd/shared/bundle/:/usr/src/app/vendor/bundle/"
+    - "~/ddd/shared/log/:/usr/src/app/log/"
+    - "~/ddd/shared/sockets/:/usr/src/app/sockets/"
   links:
     - db
   ports:
