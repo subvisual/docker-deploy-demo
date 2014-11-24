@@ -4,6 +4,7 @@ web:
   volumes:
     - .:/usr/src/app
     - "~/ddd/shared/bundle/:/usr/src/app/vendor/bundle/"
+    - "~/ddd/shared/.bundle/:/usr/src/app/.bundle/"
     - "~/ddd/shared/log/:/usr/src/app/log/"
     - "~/ddd/shared/sockets/:/usr/src/app/sockets/"
   links:
