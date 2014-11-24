@@ -44,21 +44,19 @@ task :deploy => :environment do
     # instance of your project.
     invoke :'git:clone'
     invoke :'deploy:link_shared_paths'
-    # invoke :'bundle:install'
-    # invoke :'rails:db_migrate'
-    # invoke :'rails:assets_precompile'
     invoke :'deploy:cleanup'
 
     to :launch do
       queue "mkdir -p #{deploy_to}/#{current_path}/tmp/"
 
-      # fig = "fig -f fig.production.yml"
-      # queue "#{fig} stop"
-      # queue "#{fig} build"
-      # queue "#{fig} run web bundle install --deployment"
-      # queue "#{fig} run web rake db:migrate"
-      # queue "#{fig} run web rake assets:precompile"
-      # queue "#{fig} start"
+      fig = "fig -f docker/fig.yml"
+      queue "#{fig} stop"
+      queue "#{fig} build"
+      queue "#{fig} run web bundle install --deployment"
+      queue "#{fig} run web bundle exec rake db:create"
+      queue "#{fig} run web bundle exec rake db:migrate"
+      queue "#{fig} run web bundle exec rake assets:precompile"
+      queue "#{fig} up -d"
     end
   end
 end
