@@ -4,6 +4,7 @@ web:
     - .:/usr/src/app
     - "~/ddd/shared/bundle/:/usr/src/app/vendor/bundle/"
     - "~/ddd/shared/.bundle/:/usr/src/app/.bundle/"
+    - "~/ddd/shared/assets/:/usr/src/app/public/assets/"
     - "~/ddd/shared/log/:/usr/src/app/log/"
     - "~/ddd/shared/sockets/:/usr/src/app/sockets/"
   links:
