@@ -1,15 +1,12 @@
 web:
-  build: docker/web
+  image: groupbuddies/dev-ruby:2.1.5
   command: bundle exec puma -C config/puma.rb
   volumes:
     - .:/usr/src/app
-    - "~/docker-deploy-demo/shared/bundle/:/usr/local/bundle/"
-    - "~/docker-deploy-demo/shared/log/:/usr/src/app/log/"
-  ports:
-    - 80:80
+    - "~/ddd/shared/bundle/vendor/:/usr/local/bundle/"
   links:
     - db
 db:
-  build: docker/db
+  image: groupbuddies/dev-postgres:9.3
   volumes:
-    - "~/.docker-volumes/test/db/:/var/lib/postgresql/data/"
+    - "~/ddd/shared/db/:/var/lib/postgresql/data/"

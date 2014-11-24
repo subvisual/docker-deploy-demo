@@ -5,7 +5,7 @@ preload_app!
 
 port        ENV['PORT'] || 3000
 environment ENV['RAILS_ENV'] || 'development'
-bind "unix:///tmp/#{ENV['APP_NAME']}.sock"
+bind "unix:///#{ENV['SOCKET_PATH']}/#{ENV['APP_NAME']}.sock"
 
 on_worker_boot do
   # worker specific setup

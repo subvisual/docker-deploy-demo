@@ -1,0 +1,16 @@
+web:
+  build: docker/web
+  command: bundle exec puma -C config/puma.rb
+  volumes:
+    - .:/usr/src/app
+    - "~/docker-deploy-demo/shared/bundle/:/usr/src/app/vendor/bundle/"
+    - "~/docker-deploy-demo/shared/log/:/usr/src/app/log/"
+    - "~/docker-deploy-demo/shared/sockets/:/usr/src/app/sockets/"
+  links:
+    - db
+  ports:
+    - 8080:80
+db:
+  build: docker/db
+  volumes:
+    - "~/docker-deploy-demo/shared/db/:/var/lib/postgresql/data/"
