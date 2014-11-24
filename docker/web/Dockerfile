@@ -7,5 +7,4 @@ ADD puma.runit /etc/service/puma/run
 
 ENV APP_NAME ddd
 ENV RAILS_ENV production
-ENV PORT 3001
 ENV SOCKET_PATH /usr/src/app/sockets
